@@ -1,0 +1,11 @@
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\bin\Release\Format9.exe
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\bin\Release\Format9.pdb
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\bin\Release\Format9.xml
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\obj\x86\Release\Format9.Resources.resources
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\obj\x86\Release\Format9.vbproj.GenerateResource.Cache
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\obj\x86\Release\Format9.exe
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\obj\x86\Release\Format9.xml
+C:\Users\yoshi\AppData\Local\Temporary Projects\Format9\obj\x86\Release\Format9.pdb
+C:\Users\yoshi\documents\visual studio 2010\Projects\Format9\Format9\obj\x86\Release\Format9.exe
+C:\Users\yoshi\documents\visual studio 2010\Projects\Format9\Format9\obj\x86\Release\Format9.xml
+C:\Users\yoshi\documents\visual studio 2010\Projects\Format9\Format9\obj\x86\Release\Format9.pdb
