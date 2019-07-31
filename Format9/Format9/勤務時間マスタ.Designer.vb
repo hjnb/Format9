@@ -30,13 +30,9 @@ Partial Class 勤務時間マスタ
         Me.dgvTimeM = New System.Windows.Forms.DataGridView()
         Me.btnRegist = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
-        Me.dayTimeBox = New hmBox.hmBox()
-        Me.nightTimeBox = New hmBox.hmBox()
-        Me.nextTimeBox = New hmBox.hmBox()
-        Me.emptyCheckDay = New System.Windows.Forms.CheckBox()
-        Me.emptyCheckNight = New System.Windows.Forms.CheckBox()
-        Me.emptyCheckNext = New System.Windows.Forms.CheckBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.dayTimeBox = New System.Windows.Forms.TextBox()
+        Me.nightTimeBox = New System.Windows.Forms.TextBox()
+        Me.nextTimeBox = New System.Windows.Forms.TextBox()
         CType(Me.dgvTimeM, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,7 +41,7 @@ Partial Class 勤務時間マスタ
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Blue
-        Me.Label1.Location = New System.Drawing.Point(39, 26)
+        Me.Label1.Location = New System.Drawing.Point(25, 26)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(72, 16)
         Me.Label1.TabIndex = 0
@@ -55,7 +51,7 @@ Partial Class 勤務時間マスタ
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(39, 74)
+        Me.Label2.Location = New System.Drawing.Point(25, 65)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(88, 16)
         Me.Label2.TabIndex = 1
@@ -65,7 +61,7 @@ Partial Class 勤務時間マスタ
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(39, 126)
+        Me.Label3.Location = New System.Drawing.Point(25, 105)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(88, 16)
         Me.Label3.TabIndex = 2
@@ -75,7 +71,7 @@ Partial Class 勤務時間マスタ
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(39, 179)
+        Me.Label4.Location = New System.Drawing.Point(25, 144)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(85, 16)
         Me.Label4.TabIndex = 3
@@ -84,114 +80,71 @@ Partial Class 勤務時間マスタ
         'wNamBox
         '
         Me.wNamBox.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.wNamBox.Location = New System.Drawing.Point(152, 22)
+        Me.wNamBox.ImeMode = System.Windows.Forms.ImeMode.Hiragana
+        Me.wNamBox.Location = New System.Drawing.Point(141, 22)
         Me.wNamBox.Name = "wNamBox"
-        Me.wNamBox.Size = New System.Drawing.Size(110, 23)
+        Me.wNamBox.Size = New System.Drawing.Size(80, 23)
         Me.wNamBox.TabIndex = 4
         '
         'dgvTimeM
         '
         Me.dgvTimeM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTimeM.Location = New System.Drawing.Point(42, 220)
+        Me.dgvTimeM.Location = New System.Drawing.Point(28, 180)
         Me.dgvTimeM.Name = "dgvTimeM"
         Me.dgvTimeM.RowTemplate.Height = 21
-        Me.dgvTimeM.Size = New System.Drawing.Size(357, 355)
+        Me.dgvTimeM.Size = New System.Drawing.Size(343, 355)
         Me.dgvTimeM.TabIndex = 10
         '
         'btnRegist
         '
-        Me.btnRegist.Location = New System.Drawing.Point(324, 137)
+        Me.btnRegist.Location = New System.Drawing.Point(225, 133)
         Me.btnRegist.Name = "btnRegist"
-        Me.btnRegist.Size = New System.Drawing.Size(75, 30)
+        Me.btnRegist.Size = New System.Drawing.Size(70, 30)
         Me.btnRegist.TabIndex = 8
         Me.btnRegist.Text = "登録"
         Me.btnRegist.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(324, 176)
+        Me.btnDelete.Location = New System.Drawing.Point(301, 133)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 30)
+        Me.btnDelete.Size = New System.Drawing.Size(70, 30)
         Me.btnDelete.TabIndex = 9
         Me.btnDelete.Text = "削除"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'dayTimeBox
         '
-        Me.dayTimeBox.hourText = "00"
+        Me.dayTimeBox.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.dayTimeBox.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.dayTimeBox.Location = New System.Drawing.Point(186, 59)
-        Me.dayTimeBox.minuteText = "00"
+        Me.dayTimeBox.Location = New System.Drawing.Point(141, 62)
         Me.dayTimeBox.Name = "dayTimeBox"
-        Me.dayTimeBox.Size = New System.Drawing.Size(111, 46)
-        Me.dayTimeBox.TabIndex = 11
+        Me.dayTimeBox.Size = New System.Drawing.Size(48, 23)
+        Me.dayTimeBox.TabIndex = 5
         '
         'nightTimeBox
         '
-        Me.nightTimeBox.hourText = "00"
+        Me.nightTimeBox.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.nightTimeBox.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.nightTimeBox.Location = New System.Drawing.Point(186, 111)
-        Me.nightTimeBox.minuteText = "00"
+        Me.nightTimeBox.Location = New System.Drawing.Point(141, 99)
         Me.nightTimeBox.Name = "nightTimeBox"
-        Me.nightTimeBox.Size = New System.Drawing.Size(111, 46)
-        Me.nightTimeBox.TabIndex = 12
+        Me.nightTimeBox.Size = New System.Drawing.Size(48, 23)
+        Me.nightTimeBox.TabIndex = 6
         '
         'nextTimeBox
         '
-        Me.nextTimeBox.hourText = "00"
+        Me.nextTimeBox.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.nextTimeBox.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.nextTimeBox.Location = New System.Drawing.Point(186, 163)
-        Me.nextTimeBox.minuteText = "00"
+        Me.nextTimeBox.Location = New System.Drawing.Point(141, 137)
         Me.nextTimeBox.Name = "nextTimeBox"
-        Me.nextTimeBox.Size = New System.Drawing.Size(111, 46)
-        Me.nextTimeBox.TabIndex = 13
-        '
-        'emptyCheckDay
-        '
-        Me.emptyCheckDay.AutoSize = True
-        Me.emptyCheckDay.Location = New System.Drawing.Point(152, 74)
-        Me.emptyCheckDay.Name = "emptyCheckDay"
-        Me.emptyCheckDay.Size = New System.Drawing.Size(15, 14)
-        Me.emptyCheckDay.TabIndex = 14
-        Me.emptyCheckDay.UseVisualStyleBackColor = True
-        '
-        'emptyCheckNight
-        '
-        Me.emptyCheckNight.AutoSize = True
-        Me.emptyCheckNight.Location = New System.Drawing.Point(152, 126)
-        Me.emptyCheckNight.Name = "emptyCheckNight"
-        Me.emptyCheckNight.Size = New System.Drawing.Size(15, 14)
-        Me.emptyCheckNight.TabIndex = 15
-        Me.emptyCheckNight.UseVisualStyleBackColor = True
-        '
-        'emptyCheckNext
-        '
-        Me.emptyCheckNext.AutoSize = True
-        Me.emptyCheckNext.Location = New System.Drawing.Point(152, 179)
-        Me.emptyCheckNext.Name = "emptyCheckNext"
-        Me.emptyCheckNext.Size = New System.Drawing.Size(15, 14)
-        Me.emptyCheckNext.TabIndex = 16
-        Me.emptyCheckNext.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.Color.Red
-        Me.Label5.Location = New System.Drawing.Point(135, 53)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(48, 12)
-        Me.Label5.TabIndex = 17
-        Me.Label5.Text = "空チェック"
+        Me.nextTimeBox.Size = New System.Drawing.Size(48, 23)
+        Me.nextTimeBox.TabIndex = 7
         '
         '勤務時間マスタ
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(451, 607)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.emptyCheckNext)
-        Me.Controls.Add(Me.emptyCheckNight)
-        Me.Controls.Add(Me.emptyCheckDay)
+        Me.ClientSize = New System.Drawing.Size(402, 556)
         Me.Controls.Add(Me.nextTimeBox)
         Me.Controls.Add(Me.nightTimeBox)
         Me.Controls.Add(Me.dayTimeBox)
@@ -218,11 +171,7 @@ Partial Class 勤務時間マスタ
     Friend WithEvents dgvTimeM As System.Windows.Forms.DataGridView
     Friend WithEvents btnRegist As System.Windows.Forms.Button
     Friend WithEvents btnDelete As System.Windows.Forms.Button
-    Friend WithEvents dayTimeBox As hmBox.hmBox
-    Friend WithEvents nightTimeBox As hmBox.hmBox
-    Friend WithEvents nextTimeBox As hmBox.hmBox
-    Friend WithEvents emptyCheckDay As System.Windows.Forms.CheckBox
-    Friend WithEvents emptyCheckNight As System.Windows.Forms.CheckBox
-    Friend WithEvents emptyCheckNext As System.Windows.Forms.CheckBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents dayTimeBox As System.Windows.Forms.TextBox
+    Friend WithEvents nightTimeBox As System.Windows.Forms.TextBox
+    Friend WithEvents nextTimeBox As System.Windows.Forms.TextBox
 End Class
