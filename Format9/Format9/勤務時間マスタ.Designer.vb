@@ -33,6 +33,9 @@ Partial Class 勤務時間マスタ
         Me.dayTimeBox = New System.Windows.Forms.TextBox()
         Me.nightTimeBox = New System.Windows.Forms.TextBox()
         Me.nextTimeBox = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.dgvTimeM, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -97,7 +100,7 @@ Partial Class 勤務時間マスタ
         '
         'btnRegist
         '
-        Me.btnRegist.Location = New System.Drawing.Point(225, 133)
+        Me.btnRegist.Location = New System.Drawing.Point(231, 133)
         Me.btnRegist.Name = "btnRegist"
         Me.btnRegist.Size = New System.Drawing.Size(70, 30)
         Me.btnRegist.TabIndex = 8
@@ -140,11 +143,41 @@ Partial Class 勤務時間マスタ
         Me.nextTimeBox.Size = New System.Drawing.Size(48, 23)
         Me.nextTimeBox.TabIndex = 7
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(191, 69)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(29, 12)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "時間"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(191, 105)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(29, 12)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "時間"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(191, 142)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(29, 12)
+        Me.Label7.TabIndex = 13
+        Me.Label7.Text = "時間"
+        '
         '勤務時間マスタ
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(402, 556)
+        Me.ClientSize = New System.Drawing.Size(400, 556)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.nextTimeBox)
         Me.Controls.Add(Me.nightTimeBox)
         Me.Controls.Add(Me.dayTimeBox)
@@ -174,4 +207,7 @@ Partial Class 勤務時間マスタ
     Friend WithEvents dayTimeBox As System.Windows.Forms.TextBox
     Friend WithEvents nightTimeBox As System.Windows.Forms.TextBox
     Friend WithEvents nextTimeBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class
