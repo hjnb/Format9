@@ -61,6 +61,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="ymdBox">
+      <HintPath>\\primergytx100s1\Hakojun\事務\さかもと\Visual Studio 2010\Projects\ymdBox\ymdBox\ymdBox\bin\Release\ymdBox.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -75,6 +78,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExDataGridView.Designer.vb">
+      <DependentUpon>ExDataGridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExDataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TopForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="勤務時間マスタ.resx">
       <DependentUpon>勤務時間マスタ.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="様式9作成.resx">
+      <DependentUpon>様式9作成.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

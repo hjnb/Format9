@@ -185,22 +185,22 @@ Public Class 勤務時間マスタ
             Return
         End If
         '日勤帯勤務時間
-        Dim dayTime As String = dayTimeBox.Text
-        If dayTime <> "" AndAlso Not System.Text.RegularExpressions.Regex.IsMatch(dayTime, "^\d+(\.\d+)?$") Then
+        Dim dayTime As String = If(dayTimeBox.Text = "", "0", dayTimeBox.Text)
+        If Not System.Text.RegularExpressions.Regex.IsMatch(dayTime, "^\d+(\.\d+)?$") Then
             MsgBox("時間単位で適切な数値を入力して下さい。", MsgBoxStyle.Exclamation)
             dayTimeBox.Focus()
             Return
         End If
         '夜間帯勤務時間
-        Dim nightTime As String = nightTimeBox.Text
-        If nightTime <> "" AndAlso Not System.Text.RegularExpressions.Regex.IsMatch(nightTime, "^\d+(\.\d+)?$") Then
+        Dim nightTime As String = If(nightTimeBox.Text = "", "0", nightTimeBox.Text)
+        If Not System.Text.RegularExpressions.Regex.IsMatch(nightTime, "^\d+(\.\d+)?$") Then
             MsgBox("時間単位で適切な数値を入力して下さい。", MsgBoxStyle.Exclamation)
             nightTimeBox.Focus()
             Return
         End If
         '日跨ぎ夜間勤務時間
-        Dim nextTime As String = nextTimeBox.Text
-        If nextTime <> "" AndAlso Not System.Text.RegularExpressions.Regex.IsMatch(nextTime, "^\d+(\.\d+)?$") Then
+        Dim nextTime As String = If(nextTimeBox.Text = "", "0", nextTimeBox.Text)
+        If Not System.Text.RegularExpressions.Regex.IsMatch(nextTime, "^\d+(\.\d+)?$") Then
             MsgBox("時間単位で適切な数値を入力して下さい。", MsgBoxStyle.Exclamation)
             nextTimeBox.Focus()
             Return
@@ -268,6 +268,21 @@ Public Class 勤務時間マスタ
         Else
             rs.Close()
             cn.Close()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' CellFormattingイベント
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub dgvTimeM_CellFormatting(sender As Object, e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles dgvTimeM.CellFormatting
+        If e.RowIndex >= 0 Then
+            If e.Value = "0" Then
+                e.Value = ""
+                e.FormattingApplied = True
+            End If
         End If
     End Sub
 

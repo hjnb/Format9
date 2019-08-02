@@ -33,7 +33,7 @@ Partial Class TopForm
         Me.btnFormat9.Name = "btnFormat9"
         Me.btnFormat9.Size = New System.Drawing.Size(192, 70)
         Me.btnFormat9.TabIndex = 0
-        Me.btnFormat9.Text = "様式9データ作成"
+        Me.btnFormat9.Text = "様式9データ作成　（仮）"
         Me.btnFormat9.UseVisualStyleBackColor = True
         '
         'btnTimeM
