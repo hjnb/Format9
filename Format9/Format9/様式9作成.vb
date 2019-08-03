@@ -17,7 +17,6 @@ Public Class 様式9作成
         Me.StartPosition = FormStartPosition.CenterScreen
         Me.FormBorderStyle = FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.KeyPreview = True
     End Sub
 
     ''' <summary>

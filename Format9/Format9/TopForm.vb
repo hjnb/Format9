@@ -16,6 +16,7 @@
 
     'フォーム
     Private f9CreateForm As 様式9作成
+    Private f9AllCreateForm As 様式9一括作成
     Private timeMForm As 勤務時間マスタ
 
     ''' <summary>
@@ -58,7 +59,7 @@
     End Sub
 
     ''' <summary>
-    ''' 様式9データ作成ボタンクリックイベント
+    ''' 個人用データ作成ボタンクリックイベント
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
@@ -80,6 +81,19 @@
         If IsNothing(timeMForm) OrElse timeMForm.IsDisposed Then
             timeMForm = New 勤務時間マスタ()
             timeMForm.Show()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 一括で～ボタンクリックイベント
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btnWriteExcel_Click(sender As System.Object, e As System.EventArgs) Handles btnWriteExcel.Click
+        If IsNothing(f9AllCreateForm) OrElse f9AllCreateForm.IsDisposed Then
+            f9AllCreateForm = New 様式9一括作成()
+            f9AllCreateForm.Show()
         End If
     End Sub
 End Class
