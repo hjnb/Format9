@@ -224,6 +224,14 @@ Format9
 	<param name="sender"></param>
 	<param name="e"></param>
 	<remarks></remarks>
+</member><member name="M:Format9.様式9一括作成.sheetExists(System.String,Microsoft.Office.Interop.Excel.Workbook)">
+	<summary>
+ シート存在チェック
+ </summary>
+	<param name="sheetName">シート名</param>
+	<param name="wb">workBook</param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:Format9.Util.EnableDoubleBuffering(System.Windows.Forms.Control)">
 	<summary>
  コントロールのDoubleBufferedプロパティをTrueにする

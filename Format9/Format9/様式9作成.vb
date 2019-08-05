@@ -208,6 +208,7 @@ Public Class 様式9作成
         End If
 
         '当月勤務データ取得
+        Dim daysInMonth As Integer = DateTime.DaysInMonth(CInt(ym.Split("/")(0)), CInt(ym.Split("/")(1))) '月の日数
         Dim workData(30) As String '勤務名保持用
         Dim cn As New ADODB.Connection()
         cn.Open(TopForm.DB_Arrange)
@@ -226,11 +227,11 @@ Public Class 様式9作成
         '先月勤務データの最後の勤務
         Dim prevLastWork As String = "" '先月の最終日の勤務
         Dim prevYm As String = New DateTime(CInt(ym.Split("/")(0)), CInt(ym.Split("/")(1)), 1).AddMonths(-1).ToString("yyyy/MM")
-        Dim lastDay As Integer = DateTime.DaysInMonth(CInt(prevYm.Split("/")(0)), CInt(prevYm.Split("/")(1)))
+        Dim daysInPrevMonth As Integer = DateTime.DaysInMonth(CInt(prevYm.Split("/")(0)), CInt(prevYm.Split("/")(1)))
         sql = "select * from KHyo where Ym = '" & prevYm & "' and Nam = '" & nam & "'"
         rs.Open(sql, cn, ADODB.CursorTypeEnum.adOpenForwardOnly, ADODB.LockTypeEnum.adLockOptimistic)
         While Not rs.EOF
-            prevLastWork = Util.checkDBNullValue(rs.Fields("H" & lastDay).Value)
+            prevLastWork = Util.checkDBNullValue(rs.Fields("H" & daysInPrevMonth).Value)
             rs.MoveNext()
         End While
         rs.Close()
@@ -240,7 +241,7 @@ Public Class 様式9作成
         End If
 
         '勤務名 → 勤務時間 変換処理
-        For i As Integer = 1 To 31
+        For i As Integer = 1 To daysInMonth
             Dim work As String = workData(i - 1)
             If workNameList.IndexOf(work) < 0 Then
                 dgvF9("Day" & i, 0).Value = ""
@@ -259,7 +260,7 @@ Public Class 様式9作成
             Dim total As Decimal = et + nt
             dgvF9("Day" & i, 1).Value = If(total > 0, total.ToString("0.00"), "")
             '日跨ぎ時間
-            If i <> 31 AndAlso work = "準夜" Then
+            If i <> daysInMonth AndAlso work = "準夜" Then
                 dgvF9("Day" & (i + 1), 1).Value = nextTime
             End If
         Next

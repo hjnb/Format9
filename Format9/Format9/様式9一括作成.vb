@@ -13,8 +13,6 @@ Public Class 様式9一括作成
     'エクセルの氏名列のアルファベット
     Private Const NAME_COLUMN_CHAR As String = "I"
 
-
-
     ''' <summary>
     ''' コンストラクタ
     ''' </summary>
@@ -72,11 +70,12 @@ Public Class 様式9一括作成
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnCreate_Click(sender As System.Object, e As System.EventArgs) Handles btnCreate.Click
-        '年月
-        Dim ym As String = ymBox.getADStr4Ym() '当月
+        '当月、当月の日数
+        Dim ym As String = ymBox.getADStr4Ym()
+        Dim daysInMonth As Integer = DateTime.DaysInMonth(CInt(ym.Split("/")(0)), CInt(ym.Split("/")(1)))
         '先月、先月の日数
         Dim prevYm As String = New DateTime(CInt(ym.Split("/")(0)), CInt(ym.Split("/")(1)), 1).AddMonths(-1).ToString("yyyy/MM")
-        Dim lastDay As Integer = DateTime.DaysInMonth(CInt(prevYm.Split("/")(0)), CInt(prevYm.Split("/")(1)))
+        Dim daysInPrevMonth As Integer = DateTime.DaysInMonth(CInt(prevYm.Split("/")(0)), CInt(prevYm.Split("/")(1)))
 
         '種別
         Dim hyo As String = If(rbtnNsI.Checked, "一般病棟", "療養病棟")
@@ -106,7 +105,7 @@ Public Class 様式9一括作成
         rs.Open(sql, cn, ADODB.CursorTypeEnum.adOpenForwardOnly, ADODB.LockTypeEnum.adLockOptimistic)
         While Not rs.EOF
             Dim nam As String = Util.checkDBNullValue(rs.Fields("Nam").Value)
-            Dim lastWork As String = Util.checkDBNullValue(rs.Fields("H" & lastDay).Value)
+            Dim lastWork As String = Util.checkDBNullValue(rs.Fields("H" & daysInPrevMonth).Value)
             If lastWork = "準夜" Then
                 If workDataDic.ContainsKey(nam) Then
                     Dim workData(,) As String = workDataDic(nam)
@@ -120,11 +119,36 @@ Public Class 様式9一括作成
         cn.Close()
 
         '勤務名→勤務時間変換
-        '
-        '
-        '
-        '
+        Dim keys(workDataDic.Keys.Count - 1) As String
+        workDataDic.Keys.CopyTo(keys, 0)
+        For Each key As String In keys
+            Dim workData(,) As String = workDataDic(key)
+            For i As Integer = 0 To daysInMonth - 1
+                Dim work As String = workData(0, i) '勤務名
+                If workNameList.IndexOf(work) < 0 Then
+                    workData(0, i) = ""
+                    Continue For
+                End If
+                Dim dayTime As String = workTimeTable.Select("WNam = '" & work & "'")(0).Item("DayTime")
+                Dim nightTime As String = workTimeTable.Select("WNam = '" & work & "'")(0).Item("NightTime")
+                Dim nextTime As String = workTimeTable.Select("WNam = '" & work & "'")(0).Item("NextTime")
+                '日勤帯時間
+                workData(0, i) = If(dayTime = "0", "", dayTime)
+                '夜間帯時間
+                Dim existsTime As String = If(workData(1, i) = "", 0, workData(1, i)) '既に入力されている時間
+                Dim et As Decimal = CDec(existsTime)
+                Dim nt As Decimal = CDec(nightTime)
+                Dim total As Decimal = et + nt
+                workData(1, i) = If(total > 0, total.ToString("0.00"), "")
+                '日跨ぎ時間
+                If i < daysInMonth - 1 AndAlso work = "準夜" Then
+                    workData(1, i + 1) = nextTime
+                End If
+            Next
 
+            '変換したデータを代入
+            workDataDic(key) = workData
+        Next
 
         '書き込みエクセルファイル選択
         Dim excelFilePath As String = ""
@@ -137,13 +161,16 @@ Public Class 様式9一括作成
         ofd.RestoreDirectory = True
         If ofd.ShowDialog() = DialogResult.OK Then
             excelFilePath = ofd.FileName
+        Else
+            Return
         End If
-        '選んだファイルがエクセルファイルなのかチェック的な処理なかんじのをやる
-        '
-        '
-        '
-        '
-        '
+
+        '選んだファイルの拡張子を確認
+        Dim ext As String = excelFilePath.Substring(excelFilePath.LastIndexOf(".") + 1)
+        If Not (ext = "xls" OrElse ext = "xlsx") Then
+            MsgBox("エクセルファイルを選択して下さい。", MsgBoxStyle.Exclamation)
+            Return
+        End If
 
         'シート名
         Dim sheetName As String = CInt(ym.Split("/")(0)) & "." & CInt(ym.Split("/")(1))
@@ -152,23 +179,34 @@ Public Class 様式9一括作成
         Dim objExcel As Excel.Application = CreateObject("Excel.Application")
         Dim objWorkBooks As Excel.Workbooks = objExcel.Workbooks
         Dim objWorkBook As Excel.Workbook = objWorkBooks.Open(excelFilePath)
+        If Not sheetExists(sheetName, objWorkBook) Then
+            MsgBox("シート: " & sheetName & " が存在しません。", MsgBoxStyle.Exclamation)
+            objExcel.Quit()
+            Marshal.ReleaseComObject(objWorkBook)
+            Marshal.ReleaseComObject(objExcel)
+            objWorkBook = Nothing
+            objExcel = Nothing
+            Return
+        End If
         Dim oSheet As Excel.Worksheet = objWorkBook.Worksheets(sheetName)
         objExcel.Calculation = Excel.XlCalculation.xlCalculationManual
         objExcel.ScreenUpdating = False
 
-        'シートに書き込み処理
+        'シートに書き込み処理(とりあえず1000行目まで氏名探すかんじで)
         For i As Integer = 1 To 1000
             Dim nam As String = If(IsNothing(oSheet.Range(NAME_COLUMN_CHAR & i).Value), "", oSheet.Range(NAME_COLUMN_CHAR & i).Value)
             If workDataDic.ContainsKey(nam) Then
                 oSheet.Range("AD" & i, "BH" & (i + 1)).Value = workDataDic(nam)
+                '文字列として貼り付けられるので、それをもう一度繰り返すことでいいかんじに数値としてなって色々計算してくれるかんじに
+                oSheet.Range("AD" & i, "BH" & (i + 1)).Value = oSheet.Range("AD" & i, "BH" & (i + 1)).Value
             End If
         Next
 
         objExcel.Calculation = Excel.XlCalculation.xlCalculationAutomatic
         objExcel.ScreenUpdating = True
 
-        '変更保存確認ダイアログ表示
-        objExcel.DisplayAlerts = True
+        '保存
+        objWorkBook.Save()
 
         ' EXCEL解放
         objExcel.Quit()
@@ -177,5 +215,22 @@ Public Class 様式9一括作成
         oSheet = Nothing
         objWorkBook = Nothing
         objExcel = Nothing
+
+        MsgBox(sheetName & "シートへの書き込みが完了しました。", MsgBoxStyle.Information)
     End Sub
+
+    ''' <summary>
+    ''' シート存在チェック
+    ''' </summary>
+    ''' <param name="sheetName">シート名</param>
+    ''' <param name="wb">workBook</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function sheetExists(sheetName As String, wb As Excel.Workbook)
+        Dim s As Excel.Worksheet
+        On Error Resume Next
+        s = wb.Sheets(SheetName)
+        On Error GoTo 0
+        Return Not s Is Nothing
+    End Function
 End Class
