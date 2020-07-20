@@ -27,7 +27,6 @@ Partial Class 様式9作成
         Me.namListBox = New System.Windows.Forms.ListBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.rbtnNsI = New System.Windows.Forms.RadioButton()
-        Me.rbtnHp = New System.Windows.Forms.RadioButton()
         Me.btnCopy = New System.Windows.Forms.Button()
         Me.rbtnNsR = New System.Windows.Forms.RadioButton()
         Me.btnSasaki = New System.Windows.Forms.Button()
@@ -40,10 +39,10 @@ Partial Class 様式9作成
         '
         Me.ymBox.boxType = 5
         Me.ymBox.DateText = ""
-        Me.ymBox.EraLabelText = "R01"
+        Me.ymBox.EraLabelText = "R02"
         Me.ymBox.EraText = ""
         Me.ymBox.Location = New System.Drawing.Point(23, 46)
-        Me.ymBox.MonthLabelText = "08"
+        Me.ymBox.MonthLabelText = "07"
         Me.ymBox.MonthText = ""
         Me.ymBox.Name = "ymBox"
         Me.ymBox.Size = New System.Drawing.Size(95, 40)
@@ -78,17 +77,6 @@ Partial Class 様式9作成
         Me.rbtnNsI.TabStop = True
         Me.rbtnNsI.Text = "一般"
         Me.rbtnNsI.UseVisualStyleBackColor = True
-        '
-        'rbtnHp
-        '
-        Me.rbtnHp.AutoSize = True
-        Me.rbtnHp.Location = New System.Drawing.Point(209, 28)
-        Me.rbtnHp.Name = "rbtnHp"
-        Me.rbtnHp.Size = New System.Drawing.Size(47, 16)
-        Me.rbtnHp.TabIndex = 8
-        Me.rbtnHp.TabStop = True
-        Me.rbtnHp.Text = "助手"
-        Me.rbtnHp.UseVisualStyleBackColor = True
         '
         'btnCopy
         '
@@ -146,7 +134,6 @@ Partial Class 様式9作成
         Me.Controls.Add(Me.btnSasaki)
         Me.Controls.Add(Me.rbtnNsR)
         Me.Controls.Add(Me.btnCopy)
-        Me.Controls.Add(Me.rbtnHp)
         Me.Controls.Add(Me.rbtnNsI)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.namListBox)
@@ -164,7 +151,6 @@ Partial Class 様式9作成
     Friend WithEvents namListBox As System.Windows.Forms.ListBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents rbtnNsI As System.Windows.Forms.RadioButton
-    Friend WithEvents rbtnHp As System.Windows.Forms.RadioButton
     Friend WithEvents btnCopy As System.Windows.Forms.Button
     Friend WithEvents rbtnNsR As System.Windows.Forms.RadioButton
     Friend WithEvents btnSasaki As System.Windows.Forms.Button

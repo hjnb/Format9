@@ -72,20 +72,15 @@ Public Class 様式9作成
         Dim syu As String = ""
         Dim hyo As String = ""
         If rbtnNsI.Checked Then
-            syu = "看"
-            hyo = "一般病棟"
+            hyo = "一般"
         ElseIf rbtnNsR.Checked Then
-            syu = "看"
-            hyo = "療養病棟"
-        Else
-            syu = "助"
-            hyo = "病棟"
+            hyo = "療養"
         End If
 
         namListBox.Items.Clear()
         Dim cn As New ADODB.Connection()
         cn.Open(TopForm.DB_Arrange)
-        Dim sql As String = "SELECT Nam FROM KHyo where Ym = '" & ym & "' and Hyo Like '%" & hyo & "' and Syu Like '%" & syu & "' order by Seq"
+        Dim sql As String = "SELECT Nam FROM KHyo where Ym = '" & ym & "' and Hyo Like '%" & hyo & "%' order by Syu,Seq"
         Dim rs As New ADODB.Recordset
         rs.Open(sql, cn, ADODB.CursorTypeEnum.adOpenForwardOnly, ADODB.LockTypeEnum.adLockOptimistic)
         While Not rs.EOF
@@ -117,7 +112,7 @@ Public Class 様式9作成
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub rbtn_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbtnHp.CheckedChanged, rbtnNsI.CheckedChanged, rbtnNsR.CheckedChanged
+    Private Sub rbtn_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbtnNsI.CheckedChanged, rbtnNsR.CheckedChanged
         If DirectCast(sender, RadioButton).Checked Then
             initNamList()
             clearDgv()
