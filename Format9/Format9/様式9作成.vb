@@ -299,7 +299,7 @@ Public Class 様式9作成
         For i As Integer = 1 To 31
             Dim dayTime As String = Util.checkDBNullValue(dgvF9("Day" & i, 0).Value)
             If dayTime = "8.00" Then
-                dgvF9("Day" & i, 1).Value = ""
+                dgvF9("Day" & i, 0).Value = "7.00"
             End If
         Next
     End Sub
